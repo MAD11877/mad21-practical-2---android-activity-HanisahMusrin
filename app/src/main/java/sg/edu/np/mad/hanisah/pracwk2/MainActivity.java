@@ -8,28 +8,35 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends Activity implements View.OnClickListener{
-private Button follow;
+private Button followBtn;
+private boolean followVar = false;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        follow = findViewById(R.id.button);
-        follow.setOnClickListener(this);
-        //String name = User.class.name;
-        //String description = User.class.description;
+        //load name and desc from User object
+        User u = new User();
+        String name = u.name;
+        String description = u.description;
+
+        followBtn = findViewById(R.id.button);
+        followBtn.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v)
     {
-        if (follow.getText().toString() == "FOLLOW")
+        if (followBtn.getText().toString() == "FOLLOW")
         {
-            follow.setText("UNFOLLOW");
+            followVar = true;
+            followBtn.setText("UNFOLLOW");
             return;
         }
-        follow.setText("FOLLOW");
+        followVar = false;
+        followBtn.setText("FOLLOW");
+        return;
     }
 }
 
